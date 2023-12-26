@@ -1,0 +1,90 @@
+# Roman numeral statement
+Roman numerals are represented by seven different symbols: I, V, X, L, C, D and M.
+
+|Symbol|Value|
+| --- | --- |
+|I|1|
+|V|5|
+|X|10|
+|L|50|
+|C|100|
+|D|500|
+|M|1000|
+
+For example, 2 is written as II in Roman numeral, just two one's added together. 
+12 is written as XII, which is simply X + II. The number 27 is written as XXVII, which is XX + V + II.
+
+Roman numerals are usually written largest to smallest from left to right. However, the numeral for four is not IIII. 
+Instead, the number four is written as IV. Because the one is before the five we subtract it making four. 
+The same principle applies to the number nine, which is written as IX. There are six instances where subtraction is used:
+
+* 'I' can be placed before V (5) and X (10) to make 4 and 9.
+* 'X' can be placed before L (50) and C (100) to make 40 and 90.
+* 'C' can be placed before D (500) and M (1000) to make 400 and 900.
+
+# What is given
+* The project has a [test class](src/test/java/com/ul/RomanNumeralTest.java) that is ready to be used.
+* It has an [Enum](src/main/java/com/ul/roman/RomanEnum.java) with the possible basic roman values. 
+Please read all the methods from the enum carefully. 
+* The [RomanApplication](src/main/java/com/ul/RomanApplication.java) is configured to start up a Spring boot 
+application with the Swagger/Open API already configured. Please don't change this file.
+* On the resources we have 3 files.
+  * [IntegerList.txt](src/main/resources/IntegerList.txt) This is a list of numbers from 1 to 3999.
+  * [RomanNumber.txt](src/main/resources/RomanNumber.txt) This is the place that you could write the roman numerals 
+  from exercises 2 onwards 
+  * [RomanNumberValidation.txt](src/main/resources/RomanNumberValidation.txt) That is the place that you can use to 
+  * validate the responses from exercises 2 onwards. 
+* We have a controller file that is not working [RomanController](src/main/java/com/ul/roman/RomanController.java) you 
+could use it from the exercise 3 onwards. 
+
+# What is expected
+We expect that the developer should be able to solve one of the exercises given below using the maximum of their 
+knowledge of algorithms, java 17, design patterns and principles, clean code, and code readability.
+
+The developer should be able to read this README fully, understand the requirements and be able to developer what was 
+required.
+
+The developer should choose one, and only one of the exercises, they have different levels of complexity.
+The first one is the easiest one, and the last one is the most difficult.
+the second exercise will be necessary to have part of the code that is present in the first exercise.
+The third one will need part of the code from the second one. and the same is valid for every exercise after this one. 
+This means that the last exercise will be a composition of all the previous exercises.
+
+Based on the level of the position that your assessment is for we recommend reading carefully the exercises and 
+choosing the correct exercise for you.
+If you wish, you could start from the first exercise and improve the code exercise by exercise until the last exercise.
+
+All the exercises have no time limit, but it has a tip telling you how long it should take, 
+only to you prepare yourself for this exercise.
+
+# Exercises 
+## 1<sup>st</sup> Exercise. 
+### Make a basic conversion from a primitive int to a roman numeral (string).
+#### Details
+* 
+#### Tips
+* This exercise should take from 20 to 40 minutes.
+* The enum has method sort not implemented. Why not implement it? Show us your lambda knowledge. 
+#### What is expected
+## 2<sup>nd</sup> Exercise. 
+### Make the method from the controller file read a file with the integer numbers convert it and write in a file the answer.
+#### Details
+#### Tips
+* This exercise should take an extra 10 to 20 minutes, or a total of 30 to 60 minutes.
+#### What is expected
+## 3<sup>rd</sup> Exercise. 
+### Make the controller work properly and be able to execute by a http call to the conversion from file made on Exercise 2.
+#### Details
+#### Tips
+#### What is expected
+## 4<sup>th</sup> Exercise. 
+### For the forth one we would like to have 2 endpoint working. one for trigger the file conversion and one that receive a int parameter. 
+#### Details
+#### Tips
+#### What is expected
+## 5<sup>th</sup> Exercise. 
+### We would like to have the best Architecture, design pattern and principle for what we have until now. 
+#### Details
+#### Tips
+#### What is expected
+
