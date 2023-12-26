@@ -1,0 +1,21 @@
+name: Deplyo Assessment Roman to AWS EC2
+
+on:
+    push:
+        branches: ['master']
+
+jobs:
+    build:
+        runs-on: ubunto-latest
+        steps:
+            - name: Checkout code
+              uses: actions/checkout@v3
+            
+            - name: Setup Java
+              uses: actions/Setup-java@v3
+              with: 
+                distribution: "temurin"
+                java-version: '17'
+            
+            - name: Build Project
+              run: mvn clean install -DskipTests
