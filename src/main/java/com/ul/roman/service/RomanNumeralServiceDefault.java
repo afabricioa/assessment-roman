@@ -12,13 +12,20 @@ import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
+import org.apache.commons.lang3.StringUtils;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 @Service
 public class RomanNumeralServiceDefault {
-    
+
+    @Value("${integer.list.file}")
+    private String fileName;
+
+    @Value("${path.to.save.file}")
+    private String pathToSave;
+
     public void convertFromFileIntToRoman() {
-        String fileName = "IntegerList.txt";
         URL resource = getClass().getClassLoader().getResource(fileName);
         Path path = Paths.get(resource.getPath());
         try {
@@ -29,7 +36,7 @@ public class RomanNumeralServiceDefault {
                         return lines + " - " + romanValue + "\n";
                     }).collect(Collectors.toList());
             
-            FileWriter fileWriter = new FileWriter("RomanNumber.txt");
+            FileWriter fileWriter = new FileWriter(pathToSave + "/RomanNumber.txt");
             PrintWriter printWriter = new PrintWriter(fileWriter);
             listToSave.forEach(el -> printWriter.print(el));
             printWriter.close();
@@ -87,5 +94,38 @@ public class RomanNumeralServiceDefault {
         }
 
         return result;
+    }
+
+    public Boolean isValidRoman(String romanValue){
+        List<Character> validRomanNumber = List.of('I', 'V', 'X', 'L', 'C', 'D', 'M');
+
+        if(StringUtils.isBlank(romanValue)){
+            return false;
+        }
+
+        if(!isValidSequence(romanValue)){
+            return false;
+        }
+        
+        for(int i = 0; i < romanValue.length(); i++){
+            char current = romanValue.charAt(i);
+
+            if(!validRomanNumber.contains(current)){
+                return false;
+            }
+        }
+
+        return true;
+    }
+
+    public Boolean isValidSequence(String roman){
+        List<String> invalidSequences = List.of("IIII", "VV", "XXXX", "LL", "CCCC", "DD", "MMMM");
+        
+        for(String sequence : invalidSequences){
+            if(roman.contains(sequence)){
+                return false;
+            }
+        }
+        return true;
     }
 }

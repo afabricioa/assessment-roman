@@ -1,6 +1,7 @@
 package com.ul.roman.controllers;
 
 import java.io.IOException;
+import java.net.URL;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -10,6 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RestController;
@@ -29,13 +31,29 @@ public class RomanController {
     RomanNumeralServiceDefault romanService;
 
     @GetMapping("/convertRomanToInt")
-    int convertRomanToInt(String value) {
-        return romanService.convertRomanToInt(value.toUpperCase());
+    ResponseEntity convertRomanToInt(String value) {
+        try{
+            if(!romanService.isValidRoman(value)){
+                throw new Exception("The Roman number you provided is incorrect.");
+            }
+            Integer resultValue = romanService.convertRomanToInt(value.toUpperCase());
+            return ResponseEntity.status(HttpStatus.OK).body(value + " = " + resultValue);
+        } catch (Exception e) {
+            return ResponseEntity.status(400).body(e.getMessage());
+        }
     }
     
     @GetMapping("/convertIntToRoman")
-    String convertIntToRoman(int value) {
-        return romanService.convertFromIntToRoman(value);
+    ResponseEntity convertIntToRoman(int value) {
+        try{
+            if(value < 0 || value > 3999){
+                throw new Exception("The Integer number you provided is incorrect.");
+            }
+            String result = romanService.convertFromIntToRoman(value);
+            return ResponseEntity.status(HttpStatus.OK).body(value + " = " + result);
+        } catch (Exception e) {
+            return ResponseEntity.status(400).body(e.getMessage());
+        }
     }
     
     @GetMapping("/convertFileToRoman")
@@ -50,13 +68,14 @@ public class RomanController {
 
         romanService.convertFromFileIntToRoman();
         try{
-            Path filePath = Paths.get(System.getProperty("user.dir"), "RomanNumber.txt");
+            URL resource = getClass().getClassLoader().getResource("RomanNumber.txt");
+            Path filePath = Paths.get(resource.getPath());
+
             byte[] fileContent = Files.readAllBytes(filePath); 
             return ResponseEntity.status(200).headers(headers).body(fileContent);
         } catch (Exception e) {
-            // Lide com exceções, se necessário
             e.printStackTrace();
-            return ResponseEntity.status(500).body(null);
+            return ResponseEntity.status(500).body(e.getMessage());
         }
     }
 }
