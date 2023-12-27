@@ -25,3 +25,14 @@ jobs:
               run: docker build -t afabricioas/roman-assessment .
             - name: Push image docker
               run: docker push afabricioas/roman-assessment
+    
+    deploy:
+      needs: build
+      runs-on: self-hosted
+      steps:
+          - name: Pulls image from docker hub
+            run: docker pull afabricioas/roman-assessment
+          - name: Remove existing container
+            run: docker rm -f deploy-roman-assessment
+          - name: Run docker container
+            run: docker run -d -p 8080:8080 --name deploy-roman-assessment afabricioas/roman-assessment:latest

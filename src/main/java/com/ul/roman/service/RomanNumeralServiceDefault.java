@@ -28,9 +28,10 @@ public class RomanNumeralServiceDefault {
                         String romanValue = convertFromIntToRoman(Integer.parseInt(lines));
                         return lines + " - " + romanValue + "\n";
                     }).collect(Collectors.toList());
+            
             FileWriter fileWriter = new FileWriter("RomanNumber.txt");
             PrintWriter printWriter = new PrintWriter(fileWriter);
-            listToSave.forEach(el -> printWriter.println(el));
+            listToSave.forEach(el -> printWriter.print(el));
             printWriter.close();
         } catch (IOException e) {
             System.out.println("e = " + e);
