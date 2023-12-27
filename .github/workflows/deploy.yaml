@@ -31,7 +31,7 @@ jobs:
       runs-on: self-hosted
       steps:
           - name: Pulls image from docker hub
-            run: docker pull afabricioas/roman-assessment
+            run: docker pull afabricioas/roman-assessment:latest
           - name: Remove existing container
             run: docker rm -f deploy-roman-assessment
           - name: Run docker container
