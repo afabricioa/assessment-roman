@@ -19,13 +19,8 @@ import org.springframework.stereotype.Service;
 @Service
 public class RomanNumeralServiceDefault {
 
-    @Value("${integer.list.file}")
-    private String fileName;
-
-    @Value("${path.to.save.file}")
-    private String pathToSave;
-
     public void convertFromFileIntToRoman() {
+        String fileName = "IntegerList.txt";
         URL resource = getClass().getClassLoader().getResource(fileName);
         Path path = Paths.get(resource.getPath());
         try {
@@ -36,8 +31,7 @@ public class RomanNumeralServiceDefault {
                         return lines + " - " + romanValue + "\n";
                     }).collect(Collectors.toList());
             
-            FileWriter fileWriter = new FileWriter(pathToSave + "/RomanNumber.txt");
-            PrintWriter printWriter = new PrintWriter(fileWriter);
+            FileWriter fileWriter = new FileWriter("RomanNumber.txt");            PrintWriter printWriter = new PrintWriter(fileWriter);
             listToSave.forEach(el -> printWriter.print(el));
             printWriter.close();
         } catch (IOException e) {
