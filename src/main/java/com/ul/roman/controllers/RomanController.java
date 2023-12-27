@@ -68,7 +68,7 @@ public class RomanController {
 
         romanService.convertFromFileIntToRoman();
         try{
-            Path filePath = Paths.get(System.getProperty("user.dir"), "RomanNumber.txt");
+            Path filePath = Paths.get(System.getProperty("user.dir"), "/src/main/resources/RomanNumber.txt");
             System.out.println(filePath);
             byte[] fileContent = Files.readAllBytes(filePath); 
             return ResponseEntity.status(200).headers(headers).body(fileContent);
