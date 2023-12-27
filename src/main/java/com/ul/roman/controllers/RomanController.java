@@ -68,9 +68,8 @@ public class RomanController {
 
         romanService.convertFromFileIntToRoman();
         try{
-            URL resource = getClass().getClassLoader().getResource("RomanNumber.txt");
-            Path filePath = Paths.get(resource.getPath());
-
+            Path filePath = Paths.get(System.getProperty("user.dir"), "/src/main/resources/RomanNumber.txt");
+            System.out.println(filePath);
             byte[] fileContent = Files.readAllBytes(filePath); 
             return ResponseEntity.status(200).headers(headers).body(fileContent);
         } catch (Exception e) {
